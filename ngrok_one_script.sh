@@ -11,6 +11,8 @@
 
 # after build, you can see your binary file under bin/*
 
+
+
 if [ "$1" = "" ]; then
 	echo "- error, input arg0 ip "
 	exit 1
@@ -21,8 +23,26 @@ export PUBLIC_IP=$1
 #export PUBLIC_IP='algo.com'
 export NGROK_DOMAIN=$PUBLIC_IP
 
+#################################################
+### create a folder and download some tarball ###
+#################################################
+wget https://github.com/inconshreveable/ngrok/archive/1.7.1.tar.gz
+ls 1.7.1tar.gz
 
+tar xzf 1.7.tar.gz
+
+ cd ngrok-1.7.1
+ wget https://studygolang.com/dl/golang/go1.7.6.linux-amd64.tar.gz
+ls  go1.7.6.linux-amd64.tar.gz
+ cd go
+ 
+log "code.google.com/p/log4go"  =>  log "github.com/alecthomas/log4go"
+perl -i.bak -pe ' s|.*google.*|	log "github.com/alecthomas/log4go"|  '   src/ngrok/log/logger.go
+
+
+##############################
 ### gen pem and secret key ###
+##############################
 openssl genrsa -out base.key 2048
 openssl req -new -x509 -nodes -key base.key -days 10000 -subj "/CN=$NGROK_DOMAIN" -out base.pem
 openssl genrsa -out server.key 2048
@@ -34,7 +54,9 @@ cp base.pem assets/client/tls/ngrokroot.crt
 
 
 
+#############################
 ### to build using golang ### 
+#############################
 export GOROOT=`pwd`/go
 
 export PATH=$GOROOT/bin:$PATH
