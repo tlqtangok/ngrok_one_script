@@ -1,2 +1,7 @@
 # ngrok_one_script
-one script to start up ngrok 
+use one single script to set up ngrok on public cloud linux machine, like aliyun or tencent cloud.
+
+## run 
+bash ngrok_one_script.sh 
+
+
