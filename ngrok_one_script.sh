@@ -108,7 +108,7 @@ go version
 
 rm -rf bin/* 
 
-make clean  1>&2 >/dev/null
+make clean  1&>2 >/dev/null
 
 # build linux
 export GOOS=linux; export GOARCH=amd64; export CGO_ENABLED=0
