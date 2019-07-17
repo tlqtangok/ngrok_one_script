@@ -55,7 +55,7 @@ fi
 
 
 if [ "$PUBLIC_IP" = "" ]; then
-	echo -e "- error, unknown error, didnot got you public domain , use bash \n\tngrok_one_script.sh xxx.com "
+	echo -e "- error, unknown error, didnot got you public domain , use\n\tbash ngrok_one_script.sh xxx.com "
 	exit 5 
 fi
 
