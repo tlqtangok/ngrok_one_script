@@ -14,8 +14,12 @@
 # after build, you can see your binary file under bin/*
 
 # how to run : 
-	# bash ngrok_one_script.sh
+	# bash ngrok_one_script.sh <you_domain>
 
+
+export PUBLIC_DOMAIN=$1
+echo $PUBLIC_DOMAIN
+export PUBLIC_IP=$PUBLIC_DOMAIN
 ###########################
 ### some assert of deps ###
 ###########################
@@ -50,9 +54,8 @@ if [ "$MAKE_WHICH" = "" ]; then
 fi
 
 
-export PUBLIC_IP=`curl icanhazip.com`
 if [ "$PUBLIC_IP" = "" ]; then
-	echo "- error, unknown error, didnot got you public ip !!!"
+	echo -e "- error, unknown error, didnot got you public domain , use bash \n\tngrok_one_script.sh xxx.com "
 	exit 5 
 fi
 
@@ -64,10 +67,11 @@ export NGROK_DOMAIN=$PUBLIC_IP
 #################################################
 mkdir -p src_ngrok_go
 cd src_ngrok_go
-
+if [ ! -d ./ngrok-1.7.1 ]; then
 wget -c https://github.com/inconshreveable/ngrok/archive/1.7.1.tar.gz
 ls 1.7.1.tar.gz
 tar xzf 1.7.1.tar.gz
+fi
 cd ngrok-1.7.1
 
 
@@ -75,10 +79,11 @@ cd ngrok-1.7.1
 # this file has issue if not edit !!!
 perl -i.bak -pe ' s|.*code.*google.com.*|	log "github.com/alecthomas/log4go"|  '   src/ngrok/log/logger.go
 
-
+if [ ! -d go/bin ];then
 wget -c https://studygolang.com/dl/golang/go1.7.6.linux-amd64.tar.gz
 ls  go1.7.6.linux-amd64.tar.gz
 tar xzf go1.7.6.linux-amd64.tar.gz
+fi
  
 
 
@@ -106,9 +111,9 @@ export PATH=$GOROOT/bin:$PATH
 
 go version
 
-rm -rf bin/* 
 
-make clean  1&>2 >/dev/null
+#make clean  2>&1 >/dev/null
+rm -rf bin/* 
 
 # build linux
 export GOOS=linux; export GOARCH=amd64; export CGO_ENABLED=0
