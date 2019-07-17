@@ -17,3 +17,6 @@ after successfully build, you can see :
 ./src_ngrok_go/ngrok-1.7.1/bin/windows_amd64/ngrok.exe
 ```
 
+## contribute & sponsor
+sponsor can enhance this project !
+![jd](./img/jd_reward_code_small.png)
