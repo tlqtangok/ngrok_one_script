@@ -2,7 +2,9 @@
 use one single script to set up ngrok on public cloud linux machine, like aliyun or tencent cloud.
 
 ## run 
-bash ngrok_one_script.sh 
+```
+bash ngrok_one_script.sh  <YOUR_DOMAIN>
+```
 
 ## build out matter
 after successfully build, you can see :
