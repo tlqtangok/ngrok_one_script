@@ -133,3 +133,7 @@ make release-client
 export CGO_ENABLED=0; export GOOS=darwin; export GOARCH=amd64
 make release-client
 
+pwd
+cp server.crt server.key ./bin
+
+
